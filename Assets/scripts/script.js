@@ -26,7 +26,7 @@ function updateScreen(data) {
     document.getElementById("weather-p").innerHTML = data.weather[0].description;
     document.getElementById("umidity").innerHTML = "Umidade: "+ data.main.humidity + "%";
 
-    if(data.weather[0].icon === "01n") {
+    if(data.weather[0].icon === "01n" || data.weather[0].icon === "01d") {
         document.getElementById("img").src = "./Assets/backgrounds/cloud-slash.svg";
     } else {
         document.getElementById("img").src = `https://openweathermap.org/img/wn/${data.weather[0].icon}.png`;
@@ -35,9 +35,18 @@ function updateScreen(data) {
 
 async function buscarCidade(city) {
 
-    const data = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}&lang=pt_br&units=metric`).then(response => response.json());
+    const data = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&limit=5&appid=${key}&lang=pt_br&units=metric`).then(response => response.json());
     console.log(data)
     updateScreen(data);
+
+    // const suggestions = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${key}`).then(response => response.json());
+
+    // suggestions.forEach(suggestion => {
+    //   console.log(`City: ${suggestion.name}`);
+    //   console.log(`Country: ${suggestion.country}`);
+    //   if (suggestion.state) {
+    //     console.log(`State: ${suggestion.state}`);
+    //   }});
 }
 
 searchBtn.addEventListener("click", () => {buscarCidade(document.getElementById("city").value)});
