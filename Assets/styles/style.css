@@ -15,14 +15,15 @@
     }
 }
 
-@keyframes rain {
+/* @keyframes rain {
     0% {
         background-position: 0 0;
     }
     100%{
         background-position: 5% 10%;
     }
-}
+} */
+
 body {
     /* background: url("../backgrounds/rain.png") center / cover no-repeat,
     url("../backgrounds/flop_morning.png") center / cover no-repeat; */
